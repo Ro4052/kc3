@@ -1,5 +1,6 @@
 import { Dog } from "@/models/dog";
 
+// TODO: Use middleware to get the app URL
 const baseURL = process.env.APP_BASE_URL!;
 
 const getDog = async (id: string): Promise<Dog> => {

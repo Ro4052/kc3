@@ -7,6 +7,7 @@ import { Button } from "../primitives/Button/Button";
 import { Card } from "../primitives/Card/Card";
 import { Input } from "../primitives/Input/Input";
 
+// TODO: Move component back into `app` directory
 export const IDCaptureCard = () => {
   const router = useRouter();
 
