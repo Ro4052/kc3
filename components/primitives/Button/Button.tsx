@@ -14,6 +14,7 @@ interface ButtonProps {
 }
 
 export const Button = ({ children, disabled, type, variant }: ButtonProps) => (
+  // TODO: Loading styles
   <button
     className={twMerge(
       // TODO: Review focus/active states - outline should be for focus, darker for active
