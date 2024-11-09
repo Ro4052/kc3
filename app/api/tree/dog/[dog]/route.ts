@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 
 import { htmlToDog } from "@/lib/details-extractor";
 
-const baseURL = process.env.KC_BASE_URL!;
+const baseURL = process.env.NEXT_PUBLIC_KC_BASE_URL!;
 const dogSearchPath = "/search/dog-profile/";
 const idSearchParam = "dogId";
 
