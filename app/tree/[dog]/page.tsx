@@ -1,9 +1,9 @@
 import { Dog } from "@/models/dog";
-
-// TODO: Use middleware to get the app URL
-const baseURL = process.env.APP_BASE_URL!;
+import { baseURLHeader } from "@/models/headers";
+import { headers } from "next/headers";
 
 const getDog = async (id: string): Promise<Dog> => {
+  const baseURL = (await headers()).get(baseURLHeader);
   const response = await fetch(`${baseURL}/api/tree/dog/${id}`);
   if (!response.ok) {
     throw new Error("Error fetching data");
