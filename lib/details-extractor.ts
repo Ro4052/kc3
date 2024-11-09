@@ -1,9 +1,37 @@
 import { parse, HTMLElement } from "node-html-parser";
 
-import { Dog } from "@/models/dog";
+import { Dog, Parent, Sex } from "@/models/dog";
 
 const extractName = (html: HTMLElement): string | undefined =>
   html.querySelector("h1.o-dog-header__title")?.textContent ?? undefined;
+
+const extractDetailsBlock = (html: HTMLElement): HTMLElement[] => [
+  ...html.querySelectorAll(".o-dog-header__details-item"),
+];
+
+const extractDetail = (
+  detailsBlock: HTMLElement[],
+  detail: string
+): string | undefined => {
+  const detailContainer = detailsBlock.find(
+    (e) => e.querySelector(".o-dog-header__details-key")?.textContent === detail
+  );
+
+  return detailContainer?.querySelector(".o-dog-header__details-value")
+    ?.textContent;
+};
+
+const extractSex = (detailsBlock: HTMLElement[]): Sex | undefined => {
+  const sex = extractDetail(detailsBlock, "Sex");
+
+  return sex ? (sex as Sex) : undefined;
+};
+
+const extractColour = (detailsBlock: HTMLElement[]): string | undefined =>
+  extractDetail(detailsBlock, "Colour");
+
+const extractDob = (detailsBlock: HTMLElement[]): string | undefined =>
+  extractDetail(detailsBlock, "Born");
 
 const extractPedigree = (html: HTMLElement): HTMLElement | undefined =>
   html.querySelector(".m-pedigree-graph__list") ?? undefined;
@@ -11,7 +39,7 @@ const extractPedigree = (html: HTMLElement): HTMLElement | undefined =>
 const extractParent = (
   parents: HTMLElement[],
   parentGender: "Sire" | "Dam"
-): Dog | undefined => {
+): Parent | undefined => {
   const anchor = parents
     .find(
       (p) =>
@@ -35,7 +63,7 @@ const extractParent = (
 
 const extractParents = (
   pedigree: HTMLElement | undefined
-): Omit<Dog, "id" | "name"> | undefined => {
+): Pick<Dog, "sire" | "dam"> | undefined => {
   if (!pedigree) {
     return undefined;
   }
@@ -63,13 +91,22 @@ export const htmlToDog = (id: string, htmlString: string): Dog | undefined => {
   const parsedHtml = parse(htmlString);
 
   const name = extractName(parsedHtml);
-  if (!name) {
+
+  const detailsBlock = extractDetailsBlock(parsedHtml);
+  const sex = extractSex(detailsBlock);
+  const colour = extractColour(detailsBlock);
+  const dob = extractDob(detailsBlock);
+
+  // TODO: Should some of these fields be optional?
+  if (!name || !sex || !colour || !dob) {
     return;
   }
 
   return {
     name,
-    id,
+    sex,
+    colour,
+    dob,
     ...extractParents(extractPedigree(parsedHtml)),
   };
 };

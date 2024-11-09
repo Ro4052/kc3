@@ -1,8 +1,10 @@
 import { twMerge } from "tailwind-merge";
 import { Header, HeaderLevel } from "../Header/Header";
 
+type CardItem = string | JSX.Element | undefined;
+
 interface CardProps {
-  children: string | JSX.Element | (string | JSX.Element)[];
+  children: CardItem | CardItem[];
   className?: string;
   title?: string;
   titleLevel?: HeaderLevel;

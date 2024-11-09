@@ -1,3 +1,4 @@
+import { Card } from "@/components/Card/Card";
 import { Dog } from "@/models/dog";
 import { baseURLHeader } from "@/models/headers";
 import { headers } from "next/headers";
@@ -35,10 +36,17 @@ export default async function FamilyTree({ params }: FamilyTreeProps) {
   }
 
   return (
-    <div className="grid">
-      <span>Family tree for: {dog.name}</span>
-      {dog.sire && <span>Sire: {dog.sire.name}</span>}
-      {dog.dam && <span>Dam: {dog.dam.name}</span>}
-    </div>
+    <Card title={dog.name} titleLevel={2}>
+      Sex: {dog.sex}
+      <br />
+      Colour: {dog.colour}
+      <br />
+      DOB: {dog.dob}
+      <br />
+      <br />
+      {dog.sire && <>Sire: {dog.sire.name}</>}
+      <br />
+      {dog.dam && <>Dam: {dog.dam.name}</>}
+    </Card>
   );
 }
