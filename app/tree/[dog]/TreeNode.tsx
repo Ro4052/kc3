@@ -23,12 +23,20 @@ export const TreeNode = async ({ dog, tree }: TreeNodeProps) => {
       )}
     >
       <div className="grid content-center">
-        <DogCard dog={dog} />
+        <DogCard dog={dog} tree={tree} />
       </div>
-      <div className="grid gap-4">
-        {leftTreeNode && <TreeNode dog={leftTreeNode} tree={tree.left!} />}
-        {rightTreeNode && <TreeNode dog={rightTreeNode} tree={tree.right!} />}
-      </div>
+      {(leftTreeNode || rightTreeNode) && (
+        <div className="grid gap-4">
+          <div className="min-h-28">
+            {leftTreeNode && <TreeNode dog={leftTreeNode} tree={tree.left!} />}
+          </div>
+          <div className="min-h-28">
+            {rightTreeNode && (
+              <TreeNode dog={rightTreeNode} tree={tree.right!} />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
