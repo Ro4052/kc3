@@ -87,7 +87,7 @@ const extractParents = (
   };
 };
 
-export const htmlToDog = (id: string, htmlString: string): Dog | undefined => {
+export const htmlToDog = (htmlString: string): Dog | undefined => {
   const parsedHtml = parse(htmlString);
 
   const name = extractName(parsedHtml);
