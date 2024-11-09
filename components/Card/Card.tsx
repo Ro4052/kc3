@@ -18,10 +18,12 @@ export const Card = ({ children, className, title, titleLevel }: CardProps) => (
     )}
   >
     {title && (
-      <Header className="mb-4" level={titleLevel ?? 3}>
+      <Header className="mb-4 text-center" level={titleLevel ?? 3}>
         {title}
       </Header>
     )}
-    <div className="grid gap-2">{children}</div>
+    <div className="grid gap-2 text-slate-600 dark:text-slate-300">
+      {children}
+    </div>
   </div>
 );

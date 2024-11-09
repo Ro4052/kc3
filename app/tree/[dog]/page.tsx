@@ -1,7 +1,9 @@
-import { Card } from "@/components/Card/Card";
+import { headers } from "next/headers";
+
 import { Dog } from "@/models/dog";
 import { baseURLHeader } from "@/models/headers";
-import { headers } from "next/headers";
+
+import { DogCard } from "./DogCard";
 
 const getDog = async (id: string): Promise<Dog | null> => {
   const baseURL = (await headers()).get(baseURLHeader);
@@ -36,17 +38,8 @@ export default async function FamilyTree({ params }: FamilyTreeProps) {
   }
 
   return (
-    <Card title={dog.name} titleLevel={2}>
-      Sex: {dog.sex}
-      <br />
-      Colour: {dog.colour}
-      <br />
-      DOB: {dog.dob}
-      <br />
-      <br />
-      {dog.sire && <>Sire: {dog.sire.name}</>}
-      <br />
-      {dog.dam && <>Dam: {dog.dam.name}</>}
-    </Card>
+    <div className="grid w-screen h-screen content-center justify-around">
+      <DogCard dog={dog} />
+    </div>
   );
 }

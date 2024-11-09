@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 
-import { Spinner } from "./Spinner";
+import { Spinner } from "../icons/Spinner";
 
 type Variant = "primary";
 

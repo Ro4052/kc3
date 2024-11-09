@@ -21,7 +21,7 @@ export const IDCaptureCard = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card className="text-center" title="Find a family tree" titleLevel={1}>
+      <Card title="Find a family tree" titleLevel={1}>
         <Input
           onChange={setDogId}
           maxLength={36}
