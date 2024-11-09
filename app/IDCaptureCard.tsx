@@ -11,9 +11,11 @@ export const IDCaptureCard = () => {
   const router = useRouter();
 
   const [dogId, setDogId] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
+    setSubmitting(true);
     router.push(`/tree/${dogId}`);
   };
 
@@ -26,7 +28,12 @@ export const IDCaptureCard = () => {
           placeholder="Enter KC dog ID"
           value={dogId}
         />
-        <Button variant="primary" type="submit" disabled={dogId.length === 0}>
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={dogId.length === 0}
+          loading={submitting}
+        >
           Submit
         </Button>
       </Card>
