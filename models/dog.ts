@@ -1,10 +1,6 @@
-export interface Parent {
-  name: string;
-  id: string;
-}
-
 export interface Dog {
+  id: string;
   name: string;
-  sire?: Parent;
-  dam?: Parent;
+  sire?: Dog;
+  dam?: Dog;
 }

@@ -1,6 +1,6 @@
 import { parse, HTMLElement } from "node-html-parser";
 
-import { Dog, Parent } from "@/models/dog";
+import { Dog } from "@/models/dog";
 
 const extractName = (html: HTMLElement): string | undefined =>
   html.querySelector("h1.o-dog-header__title")?.textContent ?? undefined;
@@ -11,7 +11,7 @@ const extractPedigree = (html: HTMLElement): HTMLElement | undefined =>
 const extractParent = (
   parents: HTMLElement[],
   parentGender: "Sire" | "Dam"
-): Parent | undefined => {
+): Dog | undefined => {
   const anchor = parents
     .find(
       (p) =>
@@ -35,7 +35,7 @@ const extractParent = (
 
 const extractParents = (
   pedigree: HTMLElement | undefined
-): Omit<Dog, "name"> | undefined => {
+): Omit<Dog, "id" | "name"> | undefined => {
   if (!pedigree) {
     return undefined;
   }
@@ -59,7 +59,7 @@ const extractParents = (
   };
 };
 
-export const htmlToDog = (htmlString: string): Dog | undefined => {
+export const htmlToDog = (id: string, htmlString: string): Dog | undefined => {
   const parsedHtml = parse(htmlString);
 
   const name = extractName(parsedHtml);
@@ -69,6 +69,7 @@ export const htmlToDog = (htmlString: string): Dog | undefined => {
 
   return {
     name,
+    id,
     ...extractParents(extractPedigree(parsedHtml)),
   };
 };

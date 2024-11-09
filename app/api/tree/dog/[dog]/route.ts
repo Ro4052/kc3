@@ -20,7 +20,11 @@ export async function GET(request: NextRequest, { params }: RequestConfig) {
   const content = await page.text();
 
   try {
-    const dog = htmlToDog(content);
+    const dog = htmlToDog(dogId, content);
+    if (!dog) {
+      console.error("Dog could not be extracted");
+      throw new Error("Dog could not be extracted");
+    }
 
     return Response.json(dog);
   } catch {
