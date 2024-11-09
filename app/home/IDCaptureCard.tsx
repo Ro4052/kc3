@@ -3,9 +3,9 @@
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/primitives/Button/Button";
-import { Card } from "@/components/primitives/Card/Card";
-import { Input } from "@/components/primitives/Input/Input";
+import { Button } from "@/components/Button/Button";
+import { Card } from "@/components/Card/Card";
+import { Input } from "@/components/Input/Input";
 
 export const IDCaptureCard = () => {
   const router = useRouter();
