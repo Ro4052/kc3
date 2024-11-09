@@ -1,15 +1,17 @@
+import { twJoin } from "tailwind-merge";
+
 import { Dog } from "@/models/dog";
 import { FamilyTree } from "@/models/family-tree";
+
 import { DogCard } from "./DogCard";
-import { twJoin } from "tailwind-merge";
+import { getDog } from "./get-dog";
 
 interface TreeNodeProps {
   dog: Dog;
-  getDog: (id: string) => Promise<Dog | null>;
   tree: FamilyTree;
 }
 
-export const TreeNode = async ({ dog, getDog, tree }: TreeNodeProps) => {
+export const TreeNode = async ({ dog, tree }: TreeNodeProps) => {
   const leftTreeNode = tree.left && (await getDog(tree.left.id));
   const rightTreeNode = tree.right && (await getDog(tree.right.id));
 
@@ -24,12 +26,8 @@ export const TreeNode = async ({ dog, getDog, tree }: TreeNodeProps) => {
         <DogCard dog={dog} />
       </div>
       <div className="grid gap-4">
-        {leftTreeNode && (
-          <TreeNode dog={leftTreeNode} getDog={getDog} tree={tree.left!} />
-        )}
-        {rightTreeNode && (
-          <TreeNode dog={rightTreeNode} getDog={getDog} tree={tree.right!} />
-        )}
+        {leftTreeNode && <TreeNode dog={leftTreeNode} tree={tree.left!} />}
+        {rightTreeNode && <TreeNode dog={rightTreeNode} tree={tree.right!} />}
       </div>
     </div>
   );
