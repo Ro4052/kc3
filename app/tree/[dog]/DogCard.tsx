@@ -22,7 +22,7 @@ interface DogCardProps {
 }
 
 export const DogCard = ({ dog }: DogCardProps) => (
-  <Card title={dog.name} titleLevel={2} className="w-fit h-fit">
+  <Card title={dog.name} titleLevel={2} className="w-full h-fit">
     <Detail tag="Sex">{dog.sex}</Detail>
     <Detail tag="Colour">{dog.colour}</Detail>
     <Detail tag="DOB">{dog.dob}</Detail>
