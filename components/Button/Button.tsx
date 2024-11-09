@@ -1,4 +1,5 @@
 import { twMerge } from "tailwind-merge";
+
 import { Spinner } from "./Spinner";
 
 type Variant = "primary";
