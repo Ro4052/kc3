@@ -1,4 +1,4 @@
-import { IDCaptureCard } from "@/components/homepage/IDCaptureCard";
+import { IDCaptureCard } from "./IDCaptureCard";
 
 export default function Home() {
   return (

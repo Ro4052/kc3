@@ -3,11 +3,10 @@
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Button } from "../primitives/Button/Button";
-import { Card } from "../primitives/Card/Card";
-import { Input } from "../primitives/Input/Input";
+import { Button } from "@/components/primitives/Button/Button";
+import { Card } from "@/components/primitives/Card/Card";
+import { Input } from "@/components/primitives/Input/Input";
 
-// TODO: Move component back into `app` directory
 export const IDCaptureCard = () => {
   const router = useRouter();
 
